@@ -42,7 +42,7 @@ namespace PremierMvc.Controllers
             var addItem = new { Name = "Tous" };
             categories.Insert(0,addItem);
 
-            ViewBag.CategoryID = new SelectList(categories, "Name", "Name");
+            ViewBag.CategoryID = new SelectList(categories, "Name", "Name", id);
 
             var products = from p in db.Products.Include(p => p.Category).Include(p => p.ProductModel)
                            where (p.Category.Name==id || id=="Tous")

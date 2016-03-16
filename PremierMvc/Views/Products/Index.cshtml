@@ -44,7 +44,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Color)
         </td>
-        <td>
+        <td class="text-right">
             @Html.DisplayFor(modelItem => item.ListPrice)
         </td>
      
@@ -56,9 +56,9 @@
             @Html.DisplayFor(modelItem => item.ModifiedDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+            @Html.ActionLink(" ", "Edit", new { id = item.ProductID }, new { @class = "glyphicon glyphicon-pencil" }) |
+            @Html.ActionLink(" ", "Details", new { id = item.ProductID }, new { @class = "glyphicon glyphicon-eye-open" }) |
+            @Html.ActionLink(" ", "Delete", new { id = item.ProductID }, new { @class = "glyphicon glyphicon-remove" })
         </td>
     </tr>
 }
