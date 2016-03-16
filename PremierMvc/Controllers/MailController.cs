@@ -15,7 +15,8 @@ namespace PremierMvc.Controllers
         {
             Personne p = new Personne() {   Nom = "Test",
                                             Courriel = "test@test.com",
-                                            DateNaissance = new DateTime(1980, 01, 13)
+                                            DateNaissance = new DateTime(1980, 01, 13),
+                                            Sexe="M"
             };
 
             return View(p);

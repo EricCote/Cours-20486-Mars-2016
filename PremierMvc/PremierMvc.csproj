@@ -60,6 +60,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -173,6 +175,8 @@
     <Compile Include="Controllers\HorlogeController.cs" />
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Filters\FrancaisAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,18 +190,34 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AWContext.cs" />
+    <Compile Include="Models\BuildVersion.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerAddress.cs" />
     <Compile Include="Models\DAL\MailingInitializer.cs" />
     <Compile Include="Models\DAL\MailingRepository.cs" />
+    <Compile Include="Models\ErrorLog.cs" />
     <Compile Include="Models\Horloge.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\DAL\MailingContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Personne.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ProductDescription.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductModelProductDescription.cs" />
+    <Compile Include="Models\SalesOrderDetail.cs" />
+    <Compile Include="Models\SalesOrderHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\AdventureWorksLT2008_Data.mdf" />
+    <Content Include="App_Data\AdventureWorksLT2008_Data_log.ldf">
+      <DependentUpon>AdventureWorksLT2008_Data.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\Mailing.mdf" />
     <Content Include="App_Data\Mailing_log.ldf">
       <DependentUpon>Mailing.mdf</DependentUpon>
@@ -281,6 +301,13 @@
     <Content Include="Views\Shared\DisplayTemplates\AutreDate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Sexe.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Sexe.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Error.cshtml" />
+    <Content Include="Views\Products\ErrorDelete.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
