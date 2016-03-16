@@ -20,9 +20,36 @@ namespace PremierMvc.Controllers
       
         public ActionResult Index()
         {
+            var categories = (from cat in db.ProductCategories
+                             where cat.CategoryID > 4
+                             select new { cat.Name }).ToList();
+
+            var addItem = new { Name = "Tous" };
+            categories.Insert(0, addItem);
+
+            ViewBag.CategoryID = new SelectList(categories, "Name", "Name");
+
             var products = db.Products.Include(p => p.Category).Include(p => p.ProductModel);
             return View(products.ToList());
         }
+
+        public ActionResult Category(string id)
+        {
+            var categories = (from cat in db.ProductCategories
+                              where cat.CategoryID > 4
+                              select new { cat.Name }).ToList();
+
+            var addItem = new { Name = "Tous" };
+            categories.Insert(0,addItem);
+
+            ViewBag.CategoryID = new SelectList(categories, "Name", "Name");
+
+            var products = from p in db.Products.Include(p => p.Category).Include(p => p.ProductModel)
+                           where (p.Category.Name==id || id=="Tous")
+                           select p;
+            return View("index",products.ToList());
+        }
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -42,7 +69,11 @@ namespace PremierMvc.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name");
+            var categories = from cat in db.ProductCategories
+                             where cat.CategoryID > 4
+                             select cat;
+
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "Name");
             ViewBag.ProductModelID = new SelectList(db.ProductModels, "ProductModelID", "Name");
             return View();
         }
@@ -61,7 +92,11 @@ namespace PremierMvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name", product.CategoryID);
+            var categories = from cat in db.ProductCategories
+                             where cat.CategoryID > 4
+                             select cat;
+
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "Name", product.CategoryID);
             ViewBag.ProductModelID = new SelectList(db.ProductModels, "ProductModelID", "Name", product.ProductModelID);
             return View(product);
         }
@@ -78,7 +113,12 @@ namespace PremierMvc.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name", product.CategoryID);
+
+            var categories = from cat in db.ProductCategories
+                             where cat.CategoryID > 4
+                             select cat;
+
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "Name", product.CategoryID);
             ViewBag.ProductModelID = new SelectList(db.ProductModels, "ProductModelID", "Name", product.ProductModelID);
             return View(product);
         }
@@ -96,7 +136,11 @@ namespace PremierMvc.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name", product.CategoryID);
+            var categories = from cat in db.ProductCategories
+                             where cat.CategoryID > 4
+                             select cat;
+
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "Name",product.CategoryID);
             ViewBag.ProductModelID = new SelectList(db.ProductModels, "ProductModelID", "Name", product.ProductModelID);
             return View(product);
         }
