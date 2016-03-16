@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DateNaissance)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexe)
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateNaissance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sexe)
         </td>
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.PersonneID }, new { @class="glyphicon glyphicon-pencil" } ) |

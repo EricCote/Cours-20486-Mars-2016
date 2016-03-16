@@ -176,6 +176,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603161351335_InitialCreate.cs" />
+    <Compile Include="Migrations\201603161351335_InitialCreate.Designer.cs">
+      <DependentUpon>201603161351335_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603161449297_Sexe.cs" />
+    <Compile Include="Migrations\201603161449297_Sexe.Designer.cs">
+      <DependentUpon>201603161449297_Sexe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DAL\MailingInitializer.cs" />
     <Compile Include="Models\DAL\MailingRepository.cs" />
@@ -188,6 +197,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AdventureWorksLT2008_Data.mdf" />
     <Content Include="App_Data\Mailing.mdf" />
     <Content Include="App_Data\Mailing_log.ldf">
       <DependentUpon>Mailing.mdf</DependentUpon>
@@ -268,15 +278,26 @@
     <Content Include="Views\Mail\Lister.cshtml" />
     <Content Include="Views\Mail\Delete.cshtml" />
     <Content Include="Views\Mail\Deleted.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AutreDate.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Sexe.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Sexe.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603161351335_InitialCreate.resx">
+      <DependentUpon>201603161351335_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603161449297_Sexe.resx">
+      <DependentUpon>201603161449297_Sexe.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

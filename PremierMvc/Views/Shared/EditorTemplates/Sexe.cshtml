@@ -1,0 +1,12 @@
+﻿@model string
+
+<div class="radio">
+    <label><input type="radio" 
+                  name="@Html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)" 
+                  value="M" @(Model=="M"?"checked":"" )>Masculin</label>
+</div>
+<div class="radio">
+    <label><input type="radio" 
+                  name="@Html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)" 
+                  value="F" @(Model=="F"? "checked" : "" )>Féminin</label>
+</div>
