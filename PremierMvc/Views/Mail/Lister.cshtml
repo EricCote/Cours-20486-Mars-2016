@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PremierMvc.Models.Personne>
+
+@{
+    ViewBag.Title = "Lister";
+}
+
+<h2>Lister</h2>
+
+<p>
+    @Html.ActionLink("Abonnement", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courriel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateNaissance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Courriel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateNaissance)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id=item.PersonneID }, new { @class="glyphicon glyphicon-pencil" } ) |
+            @Html.ActionLink(" ", "Details", new { id=item.PersonneID }, new { @class = "glyphicon glyphicon-eye-open" }) |
+            @Html.ActionLink(" ", "Delete", new { id=item.PersonneID }, new { @class = "glyphicon glyphicon-remove" })
+        </td>
+    </tr>
+}
+
+</table>

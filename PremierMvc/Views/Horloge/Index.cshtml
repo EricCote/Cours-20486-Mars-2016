@@ -1,0 +1,14 @@
+﻿
+@model PremierMvc.Models.Horloge
+@{
+    ViewBag.Title = "Heure";
+}
+
+<h2>Heure</h2>
+
+
+<p>
+    Bonjour, il est @Model.Heure.ToString("T") en  @Model.Pays dans le fuseau Horaire
+       @ViewBag.FuseauHoraire.StandardName !!!!!
+
+</p>

@@ -1,0 +1,15 @@
+﻿@model PremierMvc.Models.Personne
+
+@{
+    ViewBag.Title = "Merci";
+}
+
+<h2>Merci</h2>
+
+<p>
+    Merci à toi @Model.Nom !
+</p>
+<p>
+    @Html.ActionLink("Enregistrer une autre personne", "index")
+</p>
+
