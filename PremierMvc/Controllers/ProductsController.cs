@@ -41,11 +41,7 @@ namespace PremierMvc.Controllers
             ViewBag.CategoryID = new SelectList(Categories, "Name", "Name", category);
             ViewBag.SubCategoryID = new SelectList(subCategories, "Name", "Name", subCat);
 
-            var products = from p in db.Products.Include(p => p.Category).Include(p => p.ProductModel)
-                           where (p.Category.Name==subCat || 
-                                 (subCat=="Tous" && p.Category.ParentCategory.Name==category  ))
-                           select p;
-            return View("index",products.ToList());
+            return View("index",null);
         }
 
 
