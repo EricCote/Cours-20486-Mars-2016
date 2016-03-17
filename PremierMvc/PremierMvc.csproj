@@ -308,6 +308,8 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\Error.cshtml" />
     <Content Include="Views\Products\ErrorDelete.cshtml" />
+    <Content Include="Views\Products\SubCat.cshtml" />
+    <Content Include="Views\Products\Grid.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

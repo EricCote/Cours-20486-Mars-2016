@@ -20,10 +20,10 @@ namespace PremierMvc.Controllers
       
         public ActionResult Index()
         {
-            return Category("Bikes","Tous");
+            return Filtre("Bikes","Tous");
         }
 
-        public ActionResult Category(string category,string subCat)
+        public ActionResult Filtre(string category,string subCat)
         {
             var Categories = (from cat in db.ProductCategories
                                  where cat.CategoryID <= 4
@@ -46,6 +46,32 @@ namespace PremierMvc.Controllers
                                  (subCat=="Tous" && p.Category.ParentCategory.Name==category  ))
                            select p;
             return View("index",products.ToList());
+        }
+
+
+        public PartialViewResult SubCat(string id) {
+            var subCategories = (from cat in db.ProductCategories
+                                 where cat.CategoryID > 4 && cat.ParentCategory.Name == id
+                                 orderby cat.Name
+                                 select new { cat.Name }).ToList();
+
+            var addItem = new { Name = "Tous" };
+            subCategories.Insert(0, addItem);
+
+
+            ViewBag.SubCategoryID = new SelectList(subCategories, "Name", "Name", "Tous");
+            return PartialView();
+        }
+
+        //id est la sous-catégorie
+        public PartialViewResult Grid(string id, string category) 
+        {
+            var products = from p in db.Products.Include(p => p.Category).Include(p => p.ProductModel)
+                           where (p.Category.Name == id ||
+                                 (id == "Tous" && p.Category.ParentCategory.Name == category))
+                           select p;
+
+            return PartialView(products.ToList());
         }
 
 
