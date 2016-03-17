@@ -20,32 +20,30 @@ namespace PremierMvc.Controllers
       
         public ActionResult Index()
         {
-            var categories = (from cat in db.ProductCategories
-                             where cat.CategoryID > 4
-                             select new { cat.Name }).ToList();
-
-            var addItem = new { Name = "Tous" };
-            categories.Insert(0, addItem);
-
-            ViewBag.CategoryID = new SelectList(categories, "Name", "Name");
-
-            var products = db.Products.Include(p => p.Category).Include(p => p.ProductModel);
-            return View(products.ToList());
+            return Category("Bikes","Tous");
         }
 
-        public ActionResult Category(string id)
+        public ActionResult Category(string category,string subCat)
         {
-            var categories = (from cat in db.ProductCategories
-                              where cat.CategoryID > 4
+            var Categories = (from cat in db.ProductCategories
+                                 where cat.CategoryID <= 4
+                                 orderby cat.Name
+                                 select new { cat.Name }).ToList();
+
+            var subCategories = (from cat in db.ProductCategories
+                              where cat.CategoryID > 4 && cat.ParentCategory.Name==category
+                              orderby cat.Name
                               select new { cat.Name }).ToList();
 
             var addItem = new { Name = "Tous" };
-            categories.Insert(0,addItem);
+            subCategories.Insert(0,addItem);
 
-            ViewBag.CategoryID = new SelectList(categories, "Name", "Name", id);
+            ViewBag.CategoryID = new SelectList(Categories, "Name", "Name", category);
+            ViewBag.SubCategoryID = new SelectList(subCategories, "Name", "Name", subCat);
 
             var products = from p in db.Products.Include(p => p.Category).Include(p => p.ProductModel)
-                           where (p.Category.Name==id || id=="Tous")
+                           where (p.Category.Name==subCat || 
+                                 (subCat=="Tous" && p.Category.ParentCategory.Name==category  ))
                            select p;
             return View("index",products.ToList());
         }

@@ -6,10 +6,12 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-</p>
+<div>
+    @Html.ActionLink("Create New", "Create")   
+
+    <div id="divCat">@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })</div>
+    <div id="divSubCat">@Html.DropDownList("SubCategoryID", null, htmlAttributes: new { @class = "form-control" })</div>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -69,9 +71,16 @@
     <script>
         $(function () {
             $("#CategoryID").change(function () {
-                url = "/products/category/" + $("#CategoryID").val();
+                url = "/products/category?category=" + $("#CategoryID").val() +"&subCat=Tous" ;
                 document.location.href = url;
             });
+            $("#SubCategoryID").change(function () {
+                url = "/products/category?category=" + $("#CategoryID").val() +
+                            "&subCat=" + $("#SubCategoryID").val();
+                document.location.href = url;
+            });
+
+
         });
 
     </script>

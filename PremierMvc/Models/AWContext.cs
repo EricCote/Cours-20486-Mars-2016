@@ -78,8 +78,8 @@ namespace PremierMvc.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Category>()
-                .HasMany(e => e.ProductCategory1)
-                .WithOptional(e => e.ProductCategory2)
+                .HasMany(e => e.SubCategories)
+                .WithOptional(e => e.ParentCategory)
                 .HasForeignKey(e => e.ParentCategoryID);
 
             modelBuilder.Entity<ProductDescription>()

@@ -13,7 +13,7 @@ namespace PremierMvc.Models
         public Category()
         {
             Products = new HashSet<Product>();
-            ProductCategory1 = new HashSet<Category>();
+            SubCategories = new HashSet<Category>();
         }
 
         [Column("ProductCategoryID")]
@@ -35,8 +35,8 @@ namespace PremierMvc.Models
         public virtual ICollection<Product> Products { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> ProductCategory1 { get; set; }
+        public virtual ICollection<Category> SubCategories { get; set; }
 
-        public virtual Category ProductCategory2 { get; set; }
+        public virtual Category ParentCategory { get; set; }
     }
 }
