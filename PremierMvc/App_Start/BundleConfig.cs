@@ -30,7 +30,7 @@ namespace PremierMvc
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/jqueryui").Include(
+            bundles.Add(new StyleBundle("~/Content/Themes/base/jqueryui").Include(
                         "~/Content/themes/base/all.css"));
         }
     }

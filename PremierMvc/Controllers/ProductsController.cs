@@ -16,8 +16,7 @@ namespace PremierMvc.Controllers
     {
         private AWContext db = new AWContext();
 
-        // GET: Products
-      
+        // GET: Products      
         public ActionResult Index()
         {
         
