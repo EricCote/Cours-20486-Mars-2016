@@ -22,16 +22,15 @@
                 url = "@Url.Action("SubCat")/" + $("#CategoryID").val();
                 $("#divSubCat").load(url, function () {
                         $("#SubCategoryID").change(function () {
-                            urlSubCat = "@Url.Action("Grid")/" + encodeURIComponent($("#SubCategoryID").val()) +
-                                   "?category=" + $("#CategoryID").val();
+                            urlSubCat = "@Url.Action("Grid")/" + encodeURIComponent($("#CategoryID").val()) +
+                                   "/" + encodeURIComponent($("#SubCategoryID").val());
                             $("#divGrid").load(urlSubCat, function () { });
-                        });           
+                        });
                 });
 
-                //On répète le code de l'événement SubCat 
+                //On répète le code de l'événement SubCat
                 //quand on vient juste de changer de Catégorie, ce qui charge le grid
-                urlSubCat = "@Url.Action("Grid")/" + "Tous" +
-                           "?category=" + $("#CategoryID").val();
+                urlSubCat = "@Url.Action("Grid")/" + encodeURIComponent($("#CategoryID").val()) + "/Tous";
                 $("#divGrid").load(urlSubCat, function () { });
             });
 

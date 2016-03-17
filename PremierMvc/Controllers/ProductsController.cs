@@ -20,6 +20,7 @@ namespace PremierMvc.Controllers
       
         public ActionResult Index()
         {
+        
             var Categories = (from cat in db.ProductCategories
                               where cat.CategoryID <= 4
                               orderby cat.Name
@@ -28,6 +29,9 @@ namespace PremierMvc.Controllers
             ViewBag.CategoryID = new SelectList(Categories, "Name", "Name", "Bikes");
    
             return View("index", null);
+
+
+
         }
 
 
@@ -45,19 +49,24 @@ namespace PremierMvc.Controllers
             return PartialView();
         }
 
-        //id est la sous-catégorie
-        public PartialViewResult Grid(string id, string category) 
+
+        [Route("Products/Grid/{category}/{subCategory?}", Name = "productGrid2")]
+        [Route("Produits/Grille/{category}/{subCategory?}", Name = "produitGrille")]
+        public PartialViewResult Grid(string category, string subCategory) 
         {
+            if (subCategory == null) subCategory = "Tous";
+
             var products = from p in db.Products.Include(p => p.Category).Include(p => p.ProductModel)
-                           where (p.Category.Name == id ||
-                                 (id == "Tous" && p.Category.ParentCategory.Name == category))
+                           where (p.Category.Name == subCategory ||
+                                 (subCategory == "Tous" && p.Category.ParentCategory.Name == category))
                            select p;
 
             return PartialView(products.ToList());
         }
 
 
-        // GET: Products/Details/5
+        // GET: Products/5
+        [Route("Products/{id:int}", Name= "DetailsProducts")]
         public ActionResult Details(int? id)
         {
             if (id == null)
