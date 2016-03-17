@@ -20,28 +20,14 @@ namespace PremierMvc.Controllers
       
         public ActionResult Index()
         {
-            return Filtre("Bikes","Tous");
-        }
-
-        public ActionResult Filtre(string category,string subCat)
-        {
             var Categories = (from cat in db.ProductCategories
-                                 where cat.CategoryID <= 4
-                                 orderby cat.Name
-                                 select new { cat.Name }).ToList();
-
-            var subCategories = (from cat in db.ProductCategories
-                              where cat.CategoryID > 4 && cat.ParentCategory.Name==category
+                              where cat.CategoryID <= 4
                               orderby cat.Name
                               select new { cat.Name }).ToList();
 
-            var addItem = new { Name = "Tous" };
-            subCategories.Insert(0,addItem);
-
-            ViewBag.CategoryID = new SelectList(Categories, "Name", "Name", category);
-            ViewBag.SubCategoryID = new SelectList(subCategories, "Name", "Name", subCat);
-
-            return View("index",null);
+            ViewBag.CategoryID = new SelectList(Categories, "Name", "Name", "Bikes");
+   
+            return View("index", null);
         }
 
 

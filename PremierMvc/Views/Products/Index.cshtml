@@ -10,29 +10,32 @@
     @Html.ActionLink("Create New", "Create")   
 
     <div id="divCat">@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })</div>
-    <div id="divSubCat">@Html.DropDownList("SubCategoryID", null, htmlAttributes: new { @class = "form-control" })</div>
+    <div id="divSubCat"></div>
 </div>
 <div id="divGrid">
-    
 </div>
 
 @section scripts{
     <script>
         $(function () {
             $("#CategoryID").change(function () {
-                url = "/products/SubCat/" + $("#CategoryID").val();
+                url = "@Url.Action("SubCat")/" + $("#CategoryID").val();
                 $("#divSubCat").load(url, function () {
                         $("#SubCategoryID").change(function () {
-                            urlSubCat = "/products/grid/" + encodeURIComponent($("#SubCategoryID").val()) +
+                            urlSubCat = "@Url.Action("Grid")/" + encodeURIComponent($("#SubCategoryID").val()) +
                                    "?category=" + $("#CategoryID").val();
                             $("#divGrid").load(urlSubCat, function () { });
                         });           
                 });
-                urlSubCat = "/products/grid/" + "Tous" +
+
+                //On répète le code de l'événement SubCat 
+                //quand on vient juste de changer de Catégorie, ce qui charge le grid
+                urlSubCat = "@Url.Action("Grid")/" + "Tous" +
                            "?category=" + $("#CategoryID").val();
                 $("#divGrid").load(urlSubCat, function () { });
             });
 
+            //On appelle le chargement des subCat au chargment initial de la page
             $("#CategoryID").change();
         });
 
