@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PremierMvc.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PremierMvc.Controllers
 {
@@ -26,11 +29,19 @@ namespace PremierMvc.Controllers
         }
 
 
-        public ViewResult Test(Personne p)
+        async public Task<ActionResult> Test(int id)
         {
-            ViewBag.Personne = p;
+            HttpClient http = new HttpClient();
+            HttpResponseMessage msg = await http.GetAsync("http://localhost:50513/api/products/" + id.ToString());
+            string data = await msg.Content.ReadAsStringAsync();
+            Product p = JsonConvert.DeserializeObject<Product>(data);
 
-            return View();
+            if (p == null)
+            {
+                  return HttpNotFound();
+            }
+
+            return View(p);
         }
 
     }
